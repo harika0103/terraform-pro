@@ -1,15 +1,32 @@
-resource "azurerm_resource_group" "terra-azure" {
-  name     = "casestudy-Terraform"
+resource "azurerm_resource_group" "example" {
+
+  name     = "harika-resources"
+
   location = "East US"
+
 }
-resource "azurerm_storage_account" "terraStorage" {
-  name                     = "hari0103strgacc"    # must be globally unique
-  resource_group_name      = azurerm_resource_group.terra-azure.name
-  location                 = azurerm_resource_group.terra-azure.location
+ 
+resource "azurerm_storage_account" "example" {
+
+  name                     = "hari0103strg"
+
+resource_group_name = azurerm_resource_group.example.name
+
+  location                 = azurerm_resource_group.example.location
+
   account_tier             = "Standard"
+
   account_replication_type = "LRS"
 
-  tags = {
-    environment = "CaseStudy"
-  }
 }
+
+resource "azurerm_storage_container" "example" {
+
+  name                  = "example-container0103"
+
+storage_account_name = azurerm_storage_account.example.name
+
+  container_access_type = "private"
+
+}
+ 
